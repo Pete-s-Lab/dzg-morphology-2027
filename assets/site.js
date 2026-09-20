@@ -116,7 +116,7 @@
       return;
     }
 
-    const turnstileToken = getTurnstileToken('#turnstile-registration');
+    const turnstileToken = getTurnstileToken(form);
 
     if (!turnstileToken) {
       status.textContent = 'Please complete the bot verification.';
@@ -170,7 +170,7 @@
     const status = form.querySelector('.status');
     const button = form.querySelector('button[type="submit"]');
 
-    const turnstileToken = getTurnstileToken('#turnstile-abstract');
+    const turnstileToken = getTurnstileToken(form);
 
     if (!turnstileToken) {
       status.textContent = 'Please complete the bot verification.';
@@ -275,16 +275,12 @@
     return body;
   }
 
-  function getTurnstileToken(selector) {
-    const container = document.querySelector(selector);
-    if (!window.turnstile || !container) return '';
+  function getTurnstileToken(form) {
+    const responseField = form.querySelector(
+      'input[name="cf-turnstile-response"]'
+    );
 
-    try {
-      return window.turnstile.getResponse(container) || '';
-    } catch (error) {
-      console.error('Could not read Turnstile response:', error);
-      return '';
-    }
+    return responseField?.value?.trim() || '';
   }
 
   function resetTurnstile(selector) {
