@@ -84,35 +84,6 @@
     });
   }
 
-  let registrationWidgetId = null;
-  let abstractWidgetId = null;
-
-  window.addEventListener('load', () => {
-    if (!window.turnstile) return;
-
-    window.turnstile.ready(() => {
-      const registrationContainer = document.querySelector('#turnstile-registration');
-      if (registrationContainer) {
-        registrationWidgetId = window.turnstile.render(registrationContainer, {
-          sitekey: TURNSTILE_SITE_KEY,
-          action: 'registration',
-          theme: 'auto',
-          size: 'flexible'
-        });
-      }
-
-      const abstractContainer = document.querySelector('#turnstile-abstract');
-      if (abstractContainer) {
-        abstractWidgetId = window.turnstile.render(abstractContainer, {
-          sitekey: TURNSTILE_SITE_KEY,
-          action: 'abstract',
-          theme: 'auto',
-          size: 'flexible'
-        });
-      }
-    });
-  });
-
   const registrationForm = document.querySelector('#registration-form');
   if (registrationForm) {
     registrationForm.addEventListener('submit', submitRegistration);
@@ -145,7 +116,7 @@
       return;
     }
 
-    const turnstileToken = getTurnstileToken(registrationWidgetId);
+    const turnstileToken = getTurnstileToken('#turnstile-registration');
 
     if (!turnstileToken) {
       status.textContent = 'Please complete the bot verification.';
@@ -180,10 +151,10 @@
       await postToFunction('submit-registration', payload);
 
       form.reset();
-      resetTurnstile(registrationWidgetId);
+      resetTurnstile('#turnstile-registration');
       status.textContent = 'Registration submitted successfully.';
     } catch (error) {
-      resetTurnstile(registrationWidgetId);
+      resetTurnstile('#turnstile-registration');
       status.textContent = error.message || 'Registration could not be submitted.';
     } finally {
       button.disabled = false;
@@ -199,7 +170,7 @@
     const status = form.querySelector('.status');
     const button = form.querySelector('button[type="submit"]');
 
-    const turnstileToken = getTurnstileToken(abstractWidgetId);
+    const turnstileToken = getTurnstileToken('#turnstile-abstract');
 
     if (!turnstileToken) {
       status.textContent = 'Please complete the bot verification.';
@@ -256,13 +227,13 @@
       const result = await postToFunction('submit-abstract', payload);
 
       form.reset();
-      resetTurnstile(abstractWidgetId);
+      resetTurnstile('#turnstile-abstract');
       setupAbstractCounterAfterReset(form);
 
       status.textContent =
         `Abstract submitted successfully (${result.word_count} words).`;
     } catch (error) {
-      resetTurnstile(abstractWidgetId);
+      resetTurnstile('#turnstile-abstract');
       status.textContent = error.message || 'Abstract could not be submitted.';
     } finally {
       button.disabled = false;
@@ -304,14 +275,26 @@
     return body;
   }
 
-  function getTurnstileToken(widgetId) {
-    if (!window.turnstile || widgetId === null) return '';
-    return window.turnstile.getResponse(widgetId) || '';
+  function getTurnstileToken(selector) {
+    const container = document.querySelector(selector);
+    if (!window.turnstile || !container) return '';
+
+    try {
+      return window.turnstile.getResponse(container) || '';
+    } catch (error) {
+      console.error('Could not read Turnstile response:', error);
+      return '';
+    }
   }
 
-  function resetTurnstile(widgetId) {
-    if (window.turnstile && widgetId !== null) {
-      window.turnstile.reset(widgetId);
+  function resetTurnstile(selector) {
+    const container = document.querySelector(selector);
+    if (!window.turnstile || !container) return;
+
+    try {
+      window.turnstile.reset(container);
+    } catch (error) {
+      console.error('Could not reset Turnstile widget:', error);
     }
   }
 

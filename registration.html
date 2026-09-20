@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Registration · DZG Morphology Meeting 2027</title>
   <link rel="stylesheet" href="assets/site.css">
-  <script src="https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit" defer></script>
+  <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
 </head>
 <body>
 <a class="skip-link" href="#main">Skip to content</a>
@@ -140,7 +140,13 @@
           </div>
 
           <div class="field full">
-            <div id="turnstile-registration"></div>
+            <div id="turnstile-registration"
+                 class="cf-turnstile"
+                 data-sitekey="0x4AAAAAAE9vNdNI1GH3vLQM"
+                 data-action="registration"
+                 data-theme="auto"
+                 data-size="flexible"
+                 data-appearance="always"></div>
           </div>
         </div>
 
