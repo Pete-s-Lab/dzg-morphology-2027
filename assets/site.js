@@ -121,6 +121,7 @@
     dietary.addEventListener('change', update);
     accessibility.addEventListener('input', update);
     accessibility.addEventListener('change', update);
+    form.addEventListener('reset', () => requestAnimationFrame(update));
 
     update();
   }
