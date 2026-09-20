@@ -1,5 +1,5 @@
 (() => {
-  const SUPABASE_URL = 'https://urlzzelymuhxtygotjgb.supabase.co';
+  const SUPABASE_URL = 'https://urlzzelymuhxtyqotjgb.supabase.co';
   const SUPABASE_PUBLISHABLE_KEY = 'sb_publishable_dMqqqHqrqPsBwE0e-6i7Dw_4791WWqz';
   const TURNSTILE_SITE_KEY = '0x4AAAAAAE9vNdNI1GH3vLQM';
 
