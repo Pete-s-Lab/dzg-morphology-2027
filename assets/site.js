@@ -86,6 +86,7 @@
 
   const registrationForm = document.querySelector('#registration-form');
   if (registrationForm) {
+    setupRegistrationConsent(registrationForm);
     registrationForm.addEventListener('submit', submitRegistration);
   }
 
@@ -93,6 +94,35 @@
   if (abstractForm) {
     setupAbstractForm(abstractForm);
     abstractForm.addEventListener('submit', submitAbstract);
+  }
+
+  function setupRegistrationConsent(form) {
+    const dietary = form.elements.dietary_requirements;
+    const accessibility = form.elements.accessibility_requirements;
+    const consent = form.elements.sensitive_data_consent;
+    const consentField = form.querySelector('#sensitive-consent-field');
+
+    if (!dietary || !accessibility || !consent || !consentField) return;
+
+    const update = () => {
+      const used =
+        dietary.value.trim() !== '' ||
+        accessibility.value.trim() !== '';
+
+      consentField.hidden = !used;
+      consent.required = used;
+
+      if (!used) {
+        consent.checked = false;
+      }
+    };
+
+    dietary.addEventListener('input', update);
+    dietary.addEventListener('change', update);
+    accessibility.addEventListener('input', update);
+    accessibility.addEventListener('change', update);
+
+    update();
   }
 
   async function submitRegistration(event) {
