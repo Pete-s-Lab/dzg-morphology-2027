@@ -1,0 +1,45 @@
+DZG Morphology Meeting 2027 — deployment notes
+
+OVERWRITE in your repository with the files from this package:
+- index.html
+- registration.html
+- abstracts.html
+- programme.html
+- speakers.html
+- venue.html
+- bonn.html
+- contact.html
+- privacy.html
+- imprint.html
+- assets/site.js
+- assets/programme-data.js
+- README.md
+
+DELETE the obsolete development checklist:
+- PRIVACY_CHECKLIST.md
+
+SUPABASE EDGE FUNCTIONS
+Replace the current function code with:
+- supabase/submit-registration_v5.ts -> submit-registration
+- supabase/submit-abstract_v4.ts -> submit-abstract
+Deploy both. Keep "Verify JWT with legacy secret" OFF.
+
+Optional security setting (recommended):
+Under Edge Functions -> Secrets add:
+TURNSTILE_ALLOWED_HOSTNAMES = pete-s-lab.github.io
+
+The functions default to pete-s-lab.github.io if this secret is absent, so the current site works either way.
+When a custom domain is added later, set this secret to:
+pete-s-lab.github.io,your-final-domain.example
+
+GIT
+After copying the files and deleting PRIVACY_CHECKLIST.md:
+  git add -A
+  git status
+  git commit -m "Finish public meeting website"
+  git push origin main
+
+Then wait for GitHub Pages deployment and hard-refresh the live site.
+
+IMPORTANT
+The website can accept and store submissions now. Until a sending domain is verified in Resend, confirmation emails to arbitrary attendee addresses remain limited by Resend's test-sender restrictions.

@@ -48,7 +48,7 @@
         if (!items.length) {
           const empty = document.createElement('div');
           empty.className = 'programme-empty';
-          empty.textContent = 'Schedule to be added';
+          empty.textContent = 'Schedule to be announced';
           sessionEl.appendChild(empty);
         }
 
