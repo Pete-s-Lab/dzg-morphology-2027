@@ -1,7 +1,7 @@
 (() => {
   const SUPABASE_URL = 'https://urlzzelymuhxtygotjgb.supabase.co';
-  const SUPABASE_PUBLISHABLE_KEY = 'PASTE_YOUR_SUPABASE_PUBLISHABLE_KEY_HERE';
-  const TURNSTILE_SITE_KEY = 'PASTE_YOUR_TURNSTILE_SITE_KEY_HERE';
+  const SUPABASE_PUBLISHABLE_KEY = 'sb_publishable_dMqqqHqrqPsBwE0e-6i7Dw_4791WWqz';
+  const TURNSTILE_SITE_KEY = '0x4AAAAAAE9vNdNI1GH3vLQM';
 
   const navToggle = document.querySelector('.nav-toggle');
   const nav = document.querySelector('.site-nav');
