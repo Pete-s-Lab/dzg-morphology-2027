@@ -5,6 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Abstracts · DZG Morphology Meeting 2027</title>
   <link rel="stylesheet" href="assets/site.css">
+  <link rel="icon" href="favicon.ico" sizes="any">
+  <link rel="icon" type="image/png" href="assets/images/favicon.png" sizes="768x768">
+  <link rel="apple-touch-icon" href="assets/images/apple-touch-icon.png">
   <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
 </head>
 <body>
@@ -139,7 +142,12 @@
           </div>
 
           <div class="field full">
-            <label class="choice"><input type="checkbox" name="invited_speaker_contest"> Participate in invited speaker contest</label>
+            <label for="invited_speaker_contest">Participate in invited speaker contest <span aria-hidden="true">*</span></label>
+            <select id="invited_speaker_contest" name="invited_speaker_contest" required>
+              <option value="" selected disabled>Please select</option>
+              <option value="true">Yes</option>
+              <option value="false">No</option>
+            </select>
           </div>
 
           <div class="field full">

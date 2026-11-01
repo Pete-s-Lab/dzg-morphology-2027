@@ -230,7 +230,7 @@
       authors: authors.join('; '),
       affiliations: affiliations.join('; '),
       presenting_author: presentingAuthor,
-      invited_speaker_contest: form.elements.invited_speaker_contest.checked,
+      invited_speaker_contest: form.elements.invited_speaker_contest.value === "true",
       presenter_career_stage: form.elements.presenter_career_stage.value,
       presentation_type: form.elements.presentation_type.value,
       abstract_text: form.elements.abstract.value.trim(),
