@@ -97,17 +97,14 @@
   }
 
   function setupRegistrationConsent(form) {
-    const dietary = form.elements.dietary_requirements;
     const accessibility = form.elements.accessibility_requirements;
     const consent = form.elements.sensitive_data_consent;
     const consentField = form.querySelector('#sensitive-consent-field');
 
-    if (!dietary || !accessibility || !consent || !consentField) return;
+    if (!accessibility || !consent || !consentField) return;
 
     const update = () => {
-      const used =
-        dietary.value.trim() !== '' ||
-        accessibility.value.trim() !== '';
+      const used = accessibility.value.trim() !== '';
 
       consentField.hidden = !used;
       consent.required = used;
@@ -117,8 +114,6 @@
       }
     };
 
-    dietary.addEventListener('input', update);
-    dietary.addEventListener('change', update);
     accessibility.addEventListener('input', update);
     accessibility.addEventListener('change', update);
     form.addEventListener('reset', () => requestAnimationFrame(update));
@@ -135,14 +130,12 @@
     const status = form.querySelector('.status');
     const button = form.querySelector('button[type="submit"]');
 
-    const sensitiveFieldsUsed =
-      form.elements.dietary_requirements.value.trim() !== '' ||
-      form.elements.accessibility_requirements.value.trim() !== '';
+    const sensitiveFieldsUsed = form.elements.accessibility_requirements.value.trim() !== '';
 
     const sensitiveConsent = form.elements.sensitive_data_consent.checked;
 
     if (sensitiveFieldsUsed && !sensitiveConsent) {
-      status.textContent = 'Please give explicit consent if you provide dietary or accessibility information.';
+      status.textContent = 'Please give explicit consent if you provide accessibility information.';
       form.elements.sensitive_data_consent.focus();
       return;
     }
@@ -168,8 +161,7 @@
       country: form.elements.country.value.trim(),
       career_stage: form.elements.career_stage.value,
       dzg_member: dzgValue === '' ? null : dzgValue === 'yes',
-      conference_dinner: dinnerValue === 'undecided' ? null : dinnerValue === 'yes',
-      dietary_requirements: form.elements.dietary_requirements.value.trim(),
+      conference_dinner: dinnerValue === 'yes',
       accessibility_requirements: form.elements.accessibility_requirements.value.trim(),
       comments: form.elements.comments.value.trim(),
       privacy_accepted: form.elements.privacy_acknowledgement.checked,
@@ -219,19 +211,14 @@
       return `${authors[index]}: ${affiliation}`;
     });
 
-    const corresponding = form.querySelector('[data-author-corresponding]:checked');
     const presenting = form.querySelector('[data-author-presenting]:checked');
 
-    if (!corresponding || !presenting) {
-      status.textContent = 'Please select one corresponding author and one presenting author.';
+    if (!presenting) {
+      status.textContent = 'Please select one presenting author.';
       return;
     }
 
-    const correspondingBlock = corresponding.closest('.author-block');
     const presentingBlock = presenting.closest('.author-block');
-
-    const correspondingAuthor =
-      correspondingBlock.querySelector('[data-author-name]').value.trim();
 
     const presentingAuthor =
       presentingBlock.querySelector('[data-author-name]').value.trim();
@@ -243,7 +230,7 @@
       authors: authors.join('; '),
       affiliations: affiliations.join('; '),
       presenting_author: presentingAuthor,
-      corresponding_author: correspondingAuthor,
+      invited_speaker_contest: form.elements.invited_speaker_contest.checked,
       presenter_career_stage: form.elements.presenter_career_stage.value,
       presentation_type: form.elements.presentation_type.value,
       abstract_text: form.elements.abstract.value.trim(),
@@ -365,12 +352,10 @@
 
         const name = block.querySelector('[data-author-name]');
         const affiliation = block.querySelector('[data-author-affiliation]');
-        const corresponding = block.querySelector('[data-author-corresponding]');
         const presenting = block.querySelector('[data-author-presenting]');
 
         name.name = `author_${n}_name`;
         affiliation.name = `author_${n}_affiliation`;
-        corresponding.value = String(n);
         presenting.value = String(n);
 
         block.querySelector('.remove-author').hidden =

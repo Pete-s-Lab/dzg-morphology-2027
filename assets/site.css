@@ -303,3 +303,9 @@ fieldset { border: 0; padding: 0; margin: 0; }
   .page-hero p { color: #333; }
   .section { padding: 20px 0; }
 }
+
+/* Invited speaker photographs */
+.speaker-avatar img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+.speaker-avatar:has(img)::before, .speaker-avatar:has(img)::after { display: none; }
+.speaker-avatar img { position: absolute; inset: 0; }

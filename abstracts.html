@@ -21,7 +21,7 @@
         <li><a aria-current="page" href="abstracts.html">Abstracts</a></li>
         <li><a href="registration.html">Registration</a></li>
         <li><a href="venue.html">Venue</a></li>
-        <li><a href="bonn.html">Bonn</a></li>
+        
         <li><a href="contact.html">Contact</a></li>
       </ul>
     </nav>
@@ -43,7 +43,7 @@
 
       <form id="abstract-form" class="form-card" novalidate>
         <h2>Authors</h2>
-        <p class="help">Add authors in presentation order. Select one corresponding author and one presenting author.</p>
+        <p class="help">Add authors in presentation order. Select one presenting author.</p>
 
         <div id="authors">
           <div class="author-block" data-author="1">
@@ -59,9 +59,6 @@
               <div class="field">
                 <label>Affiliation *</label>
                 <input data-author-affiliation type="text" required>
-              </div>
-              <div class="field">
-                <label class="choice"><input data-author-corresponding type="radio" name="corresponding_author_choice" value="1" required> Corresponding author</label>
               </div>
               <div class="field">
                 <label class="choice"><input data-author-presenting type="radio" name="presenting_author_choice" value="1" required> Presenting author</label>
@@ -86,9 +83,6 @@
               <div class="field">
                 <label>Affiliation *</label>
                 <input data-author-affiliation type="text" required>
-              </div>
-              <div class="field">
-                <label class="choice"><input data-author-corresponding type="radio" name="corresponding_author_choice" required> Corresponding author</label>
               </div>
               <div class="field">
                 <label class="choice"><input data-author-presenting type="radio" name="presenting_author_choice" required> Presenting author</label>
@@ -140,6 +134,10 @@
             <label for="keywords">Keywords</label>
             <input id="keywords" name="keywords" type="text">
             <small>Suggested: 3–5 keywords, separated by commas.</small>
+          </div>
+
+          <div class="field full">
+            <label class="choice"><input type="checkbox" name="invited_speaker_contest"> Participate in invited speaker contest</label>
           </div>
 
           <div class="field full">
