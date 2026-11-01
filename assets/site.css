@@ -309,3 +309,5 @@ fieldset { border: 0; padding: 0; margin: 0; }
 
 .speaker-avatar:has(img)::before, .speaker-avatar:has(img)::after { display: none; }
 .speaker-avatar img { position: absolute; inset: 0; }
+
+.status.status-warning { display:block; padding:12px 15px; margin-top:12px; border-left:4px solid #a76500; border-radius:6px; background:#fff5e7; color:#583700; }

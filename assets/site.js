@@ -239,6 +239,7 @@
       privacy_accepted: form.elements.privacy_acknowledgement.checked
     };
 
+    status.classList.remove('status-warning');
     setSubmitting(button, status, true, 'Submitting abstract…');
 
     try {
@@ -248,8 +249,13 @@
       resetTurnstile('#turnstile-abstract');
       setupAbstractCounterAfterReset(form);
 
-      status.textContent =
-        `Abstract submitted successfully (${result.word_count} words).`;
+      if (result.registration_found === false) {
+        status.textContent = 'Abstract received — registration required. No meeting registration was found for this email address. Your abstract has been saved, but it can only be considered if you register before the abstract submission deadline using the same email address.';
+        status.classList.add('status-warning');
+      } else {
+        status.textContent = `Abstract submitted successfully (${result.word_count} words).`;
+        status.classList.remove('status-warning');
+      }
     } catch (error) {
       resetTurnstile('#turnstile-abstract');
       status.textContent = error.message || 'Abstract could not be submitted.';
