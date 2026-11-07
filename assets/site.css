@@ -383,3 +383,25 @@ fieldset { border: 0; padding: 0; margin: 0; }
 }
 
 .status.status-warning { display:block; padding:12px 15px; margin-top:12px; border-left:4px solid #a76500; border-radius:6px; background:#fff5e7; color:#583700; }
+
+/* Meeting venue and forthcoming map */
+.venue-details { max-width: 900px; }
+.venue-details h2 { margin-top: 0; }
+.venue-details address { margin: 1.5rem 0 2rem; font-style: normal; line-height: 1.75; }
+.venue-map-placeholder {
+  min-height: 340px;
+  border: 2px dashed color-mix(in srgb, var(--green) 45%, var(--line));
+  border-radius: var(--radius);
+  background: linear-gradient(135deg, color-mix(in srgb, var(--pale-green) 55%, var(--white)), var(--paper-2));
+  color: var(--ink-soft);
+  display: flex;
+  flex-direction: column;
+  gap: .5rem;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 30px;
+}
+.venue-map-placeholder .venue-map-icon { color: var(--green); font-size: 3.5rem; line-height: 1; }
+.venue-map-placeholder span:last-child { color: var(--muted); }
+.venue-map-link { margin-top: 1rem; }
