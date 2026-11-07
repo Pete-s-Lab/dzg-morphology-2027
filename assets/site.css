@@ -404,4 +404,17 @@ fieldset { border: 0; padding: 0; margin: 0; }
 }
 .venue-map-placeholder .venue-map-icon { color: var(--green); font-size: 3.5rem; line-height: 1; }
 .venue-map-placeholder span:last-child { color: var(--muted); }
+.venue-map {
+  border: 2px dashed color-mix(in srgb, var(--green) 45%, var(--line));
+  border-radius: var(--radius);
+  padding: 12px;
+  background: var(--paper);
+}
+.venue-map img {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  border-radius: calc(var(--radius) - 7px);
+}
 .venue-map-link { margin-top: 1rem; }
